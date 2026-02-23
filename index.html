@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GridHub Security Solutions | Professional Security Equipment</title>
+    <title>GridHub Security Solutions | Online Security Shop Nairobi</title>
+    <meta name="description" content="Kenya's leading online security shop. Buy CCTV cameras, dash cams, motion sensors & hidden cameras online. Delivery across Nairobi.">
+    <meta name="keywords" content="buy CCTV online Kenya, security cameras Nairobi, dash cam Kenya, online security shop">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -27,6 +29,7 @@
                         'float': 'float 6s ease-in-out infinite',
                         'scan': 'scan 4s linear infinite',
                         'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.5s ease-out',
                     },
                     keyframes: {
                         float: {
@@ -40,6 +43,10 @@
                         glow: {
                             'from': { boxShadow: '0 0 10px #00d4ff, 0 0 20px #00d4ff' },
                             'to': { boxShadow: '0 0 20px #00d4ff, 0 0 30px #00d4ff' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
                         }
                     }
                 }
@@ -138,40 +145,132 @@
         .kenya-flag {
             background: linear-gradient(to bottom, #000000 33%, #ff0000 33%, #ff0000 66%, #006600 66%);
         }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(26,26,26,0.9) 0%, rgba(0,0,0,0.8) 100%);
+            border: 1px solid rgba(0,212,255,0.2);
+        }
+
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            transition: all 0.3s ease;
+        }
+
+        .sticky-nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #0099cc);
+            z-index: 100;
+            transition: width 0.1s;
+        }
+
+        .notification-badge {
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .image-zoom {
+            overflow: hidden;
+        }
+
+        .image-zoom img {
+            transition: transform 0.5s ease;
+        }
+
+        .image-zoom:hover img {
+            transform: scale(1.1);
+        }
+
+        .online-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            animation: pulse 2s infinite;
+        }
     </style>
 </head>
 <body class="font-inter grid-pattern">
 
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+
+    <!-- Top Bar -->
+    <div class="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border-b border-cyan-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+            <div class="flex justify-between items-center text-xs text-cyan-300">
+                <div class="flex items-center space-x-4">
+                    <span class="flex items-center space-x-1">
+                        <i class="fas fa-truck"></i>
+                        <span>Free Delivery in Nairobi</span>
+                    </span>
+                    <span class="hidden sm:inline">|</span>
+                    <span class="hidden sm:inline flex items-center space-x-1">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>1 Year Warranty</span>
+                    </span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://wa.me/254706230252" target="_blank" class="hover:text-white transition-colors flex items-center space-x-1">
+                        <i class="fab fa-whatsapp text-green-400"></i>
+                        <span>Order via WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-panel border-b border-cyan-500/20">
+    <nav class="sticky-nav glass-panel border-b border-cyan-500/20" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center security-icon">
+                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center security-icon animate-glow relative">
                         <i class="fas fa-shield-alt text-white text-xl"></i>
+                        <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-black online-badge"></div>
                     </div>
                     <div>
                         <h1 class="font-orbitron font-bold text-xl tracking-wider text-white">GRIDHUB</h1>
-                        <p class="text-xs text-cyan-400 tracking-widest">SECURITY SOLUTIONS</p>
+                        <p class="text-xs text-cyan-400 tracking-widest flex items-center space-x-1">
+                            <span>ONLINE SECURITY SHOP</span>
+                            <span class="w-4 h-3 rounded-sm kenya-flag inline-block"></span>
+                        </p>
                     </div>
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#products" class="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Products</a>
-                    <a href="#features" class="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Features</a>
+                    <a href="#products" class="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Shop</a>
+                    <a href="#services" class="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Services</a>
+                    <a href="#testimonials" class="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Reviews</a>
                     <a href="#about" class="text-gray-300 hover:text-cyan-400 transition-colors font-medium">About</a>
+                    <a href="#faq" class="text-gray-300 hover:text-cyan-400 transition-colors font-medium">FAQ</a>
                     <a href="#contact" class="text-gray-300 hover:text-cyan-400 transition-colors font-medium">Contact</a>
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <button onclick="toggleSearch()" class="p-2 text-gray-300 hover:text-cyan-400 transition-colors">
+                    <button onclick="toggleSearch()" class="p-2 text-gray-300 hover:text-cyan-400 transition-colors" aria-label="Search">
                         <i class="fas fa-search text-xl"></i>
                     </button>
-                    <button onclick="toggleCart()" class="relative p-2 text-gray-300 hover:text-cyan-400 transition-colors">
+                    <button onclick="toggleCart()" class="relative p-2 text-gray-300 hover:text-cyan-400 transition-colors" aria-label="Cart">
                         <i class="fas fa-shopping-cart text-xl"></i>
                         <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold opacity-0 transition-opacity">0</span>
+                        <span id="cart-ping" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full opacity-0"></span>
                     </button>
-                    <button class="md:hidden p-2 text-gray-300" onclick="toggleMobileMenu()">
+                    <button class="md:hidden p-2 text-gray-300" onclick="toggleMobileMenu()" aria-label="Menu">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -182,7 +281,7 @@
         <div id="search-bar" class="hidden border-t border-cyan-500/20 bg-grid-gray/95 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-4 py-4">
                 <div class="relative">
-                    <input type="text" id="search-input" placeholder="Search security products..." 
+                    <input type="text" id="search-input" placeholder="Search cameras, sensors, dash cams..." 
                            class="w-full bg-black/50 border border-cyan-500/30 rounded-lg py-3 px-12 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors"
                            oninput="filterProducts(this.value)">
                     <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
@@ -190,16 +289,34 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
+                <div class="mt-2 flex gap-2 text-sm text-gray-400">
+                    <span>Popular:</span>
+                    <button onclick="quickSearch('CCTV')" class="hover:text-cyan-400 underline">CCTV</button>
+                    <button onclick="quickSearch('dash cam')" class="hover:text-cyan-400 underline">Dash Cam</button>
+                    <button onclick="quickSearch('sensor')" class="hover:text-cyan-400 underline">Sensor</button>
+                </div>
             </div>
         </div>
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-cyan-500/20 bg-grid-gray">
             <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="#products" class="block px-3 py-2 text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-lg">Products</a>
-                <a href="#features" class="block px-3 py-2 text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-lg">Features</a>
+                <a href="#products" class="block px-3 py-2 text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-lg">Shop</a>
+                <a href="#services" class="block px-3 py-2 text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-lg">Services</a>
+                <a href="#testimonials" class="block px-3 py-2 text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-lg">Reviews</a>
                 <a href="#about" class="block px-3 py-2 text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-lg">About</a>
+                <a href="#faq" class="block px-3 py-2 text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-lg">FAQ</a>
                 <a href="#contact" class="block px-3 py-2 text-gray-300 hover:text-cyan-400 hover:bg-white/5 rounded-lg">Contact</a>
+                <div class="pt-4 border-t border-gray-800 mt-4">
+                    <a href="tel:+254706230252" class="flex items-center space-x-2 px-3 py-2 text-cyan-400">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 706 230 252</span>
+                    </a>
+                    <a href="https://wa.me/254706230252" class="flex items-center space-x-2 px-3 py-2 text-green-400">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Order on WhatsApp</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
@@ -209,117 +326,111 @@
         <div class="absolute inset-0 hero-grid"></div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%2300d4ff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
         
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-20 left-10 w-32 h-32 border border-cyan-500/20 rounded-full animate-pulse-slow"></div>
+            <div class="absolute bottom-40 right-20 w-48 h-48 border border-cyan-500/10 rounded-full animate-pulse-slow" style="animation-delay: 1s;"></div>
+        </div>
+        
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 mb-8 animate-pulse-slow">
-                <span class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
-                <span class="text-cyan-400 text-sm font-medium tracking-wider">24/7 PROTECTION AVAILABLE IN NAIROBI</span>
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 mb-8 animate-pulse-slow">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span class="text-green-400 text-sm font-medium tracking-wider">ONLINE SHOP - DELIVERY ACROSS NAIROBI</span>
             </div>
             
-            <h1 class="font-orbitron text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-200 to-cyan-400">SECURE YOUR</span><br>
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600">WORLD</span>
+            <h1 class="font-orbitron text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight animate-slide-up">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-200 to-cyan-400">SHOP SECURITY</span><br>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600">ONLINE</span>
             </h1>
             
-            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 font-light">
-                Advanced surveillance technology for homes and businesses in Kenya. Professional-grade security equipment with cutting-edge AI detection.
+            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 font-light animate-slide-up" style="animation-delay: 0.2s;">
+                Kenya's premier online security store. Browse, order, and receive professional security equipment delivered to your door in Nairobi.
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up" style="animation-delay: 0.4s;">
                 <button onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})" 
-                        class="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold text-lg overflow-hidden transition-transform hover:scale-105">
+                        class="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold text-lg overflow-hidden transition-transform hover:scale-105 shadow-lg shadow-cyan-500/25">
                     <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                     <span class="relative flex items-center space-x-2">
-                        <span>EXPLORE PRODUCTS</span>
+                        <span>BROWSE PRODUCTS</span>
                         <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </span>
                 </button>
                 
-                <button onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})" 
-                        class="px-8 py-4 border border-cyan-500/50 rounded-lg font-bold text-lg hover:bg-cyan-500/10 transition-all hover:border-cyan-400">
-                    LEARN MORE
-                </button>
+                <a href="https://wa.me/254706230252" target="_blank" class="px-8 py-4 bg-green-600 hover:bg-green-500 rounded-lg font-bold text-lg transition-all flex items-center space-x-2 shadow-lg shadow-green-600/25">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>ORDER ON WHATSAPP</span>
+                </a>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="mt-12 flex flex-wrap justify-center gap-6 text-gray-500 text-sm animate-slide-up" style="animation-delay: 0.6s;">
+                <span class="flex items-center space-x-2"><i class="fas fa-truck text-cyan-400"></i><span>Free Delivery in Nairobi</span></span>
+                <span class="flex items-center space-x-2"><i class="fas fa-shield-alt text-cyan-400"></i><span>1 Year Warranty</span></span>
+                <span class="flex items-center space-x-2"><i class="fas fa-undo text-cyan-400"></i><span>7-Day Returns</span></span>
+                <span class="flex items-center space-x-2"><i class="fas fa-tools text-cyan-400"></i><span>Installation Support</span></span>
             </div>
 
             <!-- Floating Stats -->
-            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                <div class="glass-panel p-6 rounded-xl animate-float" style="animation-delay: 0s;">
-                    <div class="text-3xl font-orbitron font-bold text-cyan-400 mb-2">500+</div>
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="glass-panel p-6 rounded-xl animate-float">
+                    <div class="text-3xl font-orbitron font-bold text-cyan-400 mb-2" id="stat-products">0</div>
                     <div class="text-sm text-gray-400">Products</div>
                 </div>
                 <div class="glass-panel p-6 rounded-xl animate-float" style="animation-delay: 0.5s;">
-                    <div class="text-3xl font-orbitron font-bold text-cyan-400 mb-2">24/7</div>
-                    <div class="text-sm text-gray-400">Support</div>
+                    <div class="text-3xl font-orbitron font-bold text-cyan-400 mb-2" id="stat-customers">0</div>
+                    <div class="text-sm text-gray-400">Happy Clients</div>
                 </div>
                 <div class="glass-panel p-6 rounded-xl animate-float" style="animation-delay: 1s;">
-                    <div class="text-3xl font-orbitron font-bold text-cyan-400 mb-2">4K</div>
-                    <div class="text-sm text-gray-400">Resolution</div>
+                    <div class="text-3xl font-orbitron font-bold text-cyan-400 mb-2">24hr</div>
+                    <div class="text-sm text-gray-400">Delivery in Nairobi</div>
                 </div>
                 <div class="glass-panel p-6 rounded-xl animate-float" style="animation-delay: 1.5s;">
-                    <div class="text-3xl font-orbitron font-bold text-cyan-400 mb-2">AI</div>
-                    <div class="text-sm text-gray-400">Powered</div>
+                    <div class="text-3xl font-orbitron font-bold text-cyan-400 mb-2">Online</div>
+                    <div class="text-sm text-gray-400">Shopping</div>
                 </div>
             </div>
         </div>
 
-        <!-- Decorative Elements -->
         <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-grid-dark to-transparent"></div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-20 relative">
+    <!-- How It Works Section (NEW) -->
+    <section class="py-16 relative border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-orbitron text-4xl font-bold mb-4">WHY CHOOSE <span class="text-cyan-400">GRIDHUB</span></h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Industry-leading security solutions with advanced technology and professional support across Kenya</p>
+            <div class="text-center mb-12">
+                <h2 class="font-orbitron text-3xl font-bold mb-4">HOW TO <span class="text-cyan-400">ORDER</span></h2>
+                <p class="text-gray-400">Simple 4-step process to get your security equipment</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
-                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-eye text-2xl text-cyan-400"></i>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center group">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl font-bold text-cyan-400">1</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">AI Detection</h3>
-                    <p class="text-gray-400">Advanced artificial intelligence distinguishes between humans, vehicles, and animals with 99% accuracy.</p>
+                    <h3 class="font-bold mb-2">Browse & Select</h3>
+                    <p class="text-sm text-gray-400">Shop our online catalog and add items to cart</p>
                 </div>
-
-                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
-                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-moon text-2xl text-cyan-400"></i>
+                <div class="text-center group">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl font-bold text-cyan-400">2</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Night Vision</h3>
-                    <p class="text-gray-400">Crystal clear infrared night vision up to 100 meters with automatic light adjustment technology.</p>
+                    <h3 class="font-bold mb-2">Checkout</h3>
+                    <p class="text-sm text-gray-400">Pay via M-Pesa, bank transfer, or cash on delivery</p>
                 </div>
-
-                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
-                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-mobile-alt text-2xl text-cyan-400"></i>
+                <div class="text-center group">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl font-bold text-cyan-400">3</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Remote Access</h3>
-                    <p class="text-gray-400">Monitor your property from anywhere in Kenya with our secure mobile app and cloud storage.</p>
+                    <h3 class="font-bold mb-2">We Deliver</h3>
+                    <p class="text-sm text-gray-400">Free same-day delivery within Nairobi</p>
                 </div>
-
-                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
-                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-bolt text-2xl text-cyan-400"></i>
+                <div class="text-center group">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-4 border border-cyan-500/30 group-hover:scale-110 transition-transform">
+                        <span class="text-2xl font-bold text-cyan-400">4</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Instant Alerts</h3>
-                    <p class="text-gray-400">Real-time notifications sent directly to your phone when motion is detected or unusual activity occurs.</p>
-                </div>
-
-                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
-                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-shield-alt text-2xl text-cyan-400"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Weatherproof</h3>
-                    <p class="text-gray-400">IP67 rated cameras withstand Kenya's diverse climate, from heavy rains to extreme heat.</p>
-                </div>
-
-                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
-                    <div class="feature-icon w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-headset text-2xl text-cyan-400"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Local Support</h3>
-                    <p class="text-gray-400">Free technical consultation and installation guidance from certified security professionals in Nairobi.</p>
+                    <h3 class="font-bold mb-2">Installation Support</h3>
+                    <p class="text-sm text-gray-400">Get remote or on-site installation guidance</p>
                 </div>
             </div>
         </div>
@@ -330,11 +441,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center mb-12">
                 <div>
-                    <h2 class="font-orbitron text-4xl font-bold mb-2">OUR <span class="text-cyan-400">PRODUCTS</span></h2>
-                    <p class="text-gray-400">Professional security equipment for every need</p>
+                    <h2 class="font-orbitron text-4xl font-bold mb-2">SHOP <span class="text-cyan-400">PRODUCTS</span></h2>
+                    <p class="text-gray-400">Professional security equipment delivered to your door</p>
                 </div>
                 
-                <!-- Category Filter -->
                 <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
                     <button onclick="filterCategory('all')" class="category-btn category-active px-6 py-2 rounded-full text-sm font-medium transition-all" data-category="all">All</button>
                     <button onclick="filterCategory('cctv')" class="category-btn px-6 py-2 rounded-full text-sm font-medium bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all" data-category="cctv">CCTV</button>
@@ -346,18 +456,194 @@
 
             <!-- Products Grid -->
             <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Products will be injected here by JavaScript -->
+                <!-- Products injected here -->
             </div>
 
             <div id="no-results" class="hidden text-center py-20">
                 <i class="fas fa-search text-6xl text-gray-700 mb-4"></i>
                 <p class="text-gray-500 text-xl">No products found matching your criteria</p>
+                <button onclick="resetFilters()" class="mt-4 text-cyan-400 hover:underline">Clear filters</button>
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-gray-500 mb-4">Can't find what you're looking for?</p>
+                <a href="https://wa.me/254706230252" target="_blank" class="inline-flex items-center space-x-2 text-cyan-400 hover:text-cyan-300">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Chat with us on WhatsApp for special orders</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 relative bg-gradient-to-b from-transparent to-black/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-orbitron text-4xl font-bold mb-4">OUR <span class="text-cyan-400">SERVICES</span></h2>
+                <p class="text-gray-400">We deliver equipment nationwide with installation support</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-cyan-500/30">
+                        <i class="fas fa-shipping-fast text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Fast Delivery</h3>
+                    <p class="text-gray-400 mb-4">Same-day delivery within Nairobi. Next-day delivery to major towns including Mombasa, Kisumu, Nakuru, and Eldoret.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>Free delivery in Nairobi</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>Secure packaging</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>Tracking available</span></li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-cyan-500/30">
+                        <i class="fas fa-headset text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Installation Support</h3>
+                    <p class="text-gray-400 mb-4">Remote installation guidance via video call, or we can connect you with certified technicians in your area.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>Video call support</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>Step-by-step guides</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>Technician referrals</span></li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl hover:border-cyan-500/50 transition-all group">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-cyan-500/30">
+                        <i class="fas fa-wrench text-2xl text-cyan-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">After-Sales Support</h3>
+                    <p class="text-gray-400 mb-4">1-year warranty on all products with technical support available via phone, WhatsApp, or email.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>1 year warranty</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>Technical support</span></li>
+                        <li class="flex items-center space-x-2"><i class="fas fa-check text-cyan-400 text-xs"></i><span>Replacement guarantee</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-orbitron text-4xl font-bold mb-4">CUSTOMER <span class="text-cyan-400">REVIEWS</span></h2>
+                <p class="text-gray-400">What our online customers say about us</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-8 rounded-2xl relative">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Ordered a CCTV system online and it arrived the same day in Nairobi. The remote setup support was excellent. Highly recommend this online store!"</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white">JM</div>
+                        <div>
+                            <div class="font-bold text-white">James M.</div>
+                            <div class="text-sm text-gray-500">Business Owner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card p-8 rounded-2xl relative">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Bought a dash cam via WhatsApp. Super convenient payment via M-Pesa and quick delivery. The product works perfectly for my Uber business."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white">SK</div>
+                        <div>
+                            <div class="font-bold text-white">Sarah K.</div>
+                            <div class="text-sm text-gray-500">Uber Driver</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card p-8 rounded-2xl relative">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Great online shopping experience. Motion sensors arrived well-packaged and the video installation guide helped me set them up easily."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-white">OO</div>
+                        <div>
+                            <div class="font-bold text-white">Omondi O.</div>
+                            <div class="text-sm text-gray-500">Homeowner</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 relative bg-gradient-to-b from-transparent to-black/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-orbitron text-4xl font-bold mb-4">FREQUENTLY ASKED <span class="text-cyan-400">QUESTIONS</span></h2>
+                <p class="text-gray-400">Common questions about our online shop</p>
+            </div>
+
+            <div class="space-y-4" id="faq-container">
+                <div class="glass-panel rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-white/5 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-lg">How do I order from your online shop?</span>
+                        <i class="fas fa-chevron-down text-cyan-400 transition-transform"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-gray-400">
+                        You can order in three ways: 1) Add items to cart and checkout on this website, 2) Message us on WhatsApp at +254 706 230 252 with your order, or 3) Call us directly. We accept M-Pesa, bank transfer, or cash on delivery.
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-white/5 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-lg">Do you deliver outside Nairobi?</span>
+                        <i class="fas fa-chevron-down text-cyan-400 transition-transform"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-gray-400">
+                        Yes! We deliver nationwide. Nairobi orders arrive same-day or next-day. Other major towns (Mombasa, Kisumu, Nakuru, Eldoret) typically receive orders within 1-2 days. Remote areas may take 3-4 days via trusted courier partners.
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-white/5 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-lg">What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down text-cyan-400 transition-transform"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-gray-400">
+                        We accept M-Pesa (Buy Goods Till Number), bank transfers to our business account, and cash on delivery (for Nairobi orders). All online payments are secure and you receive immediate confirmation.
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-white/5 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-lg">Do you provide installation services?</span>
+                        <i class="fas fa-chevron-down text-cyan-400 transition-transform"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-gray-400">
+                        We provide remote installation support via video call and detailed guides. For customers needing physical installation, we can refer you to certified technicians in your area. Many of our products are designed for easy DIY installation.
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-lg overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-white/5 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-bold text-lg">What is your return policy?</span>
+                        <i class="fas fa-chevron-down text-cyan-400 transition-transform"></i>
+                    </button>
+                    <div class="hidden px-6 pb-4 text-gray-400">
+                        We offer a 7-day return policy for defective or incorrect items. All products come with a 1-year manufacturer warranty. If you receive a faulty product, contact us immediately via WhatsApp or phone for replacement.
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 relative bg-gradient-to-b from-transparent to-black/50">
+    <section id="about" class="py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="relative">
@@ -366,18 +652,18 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="space-y-4">
                                 <div class="h-32 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-video text-4xl text-cyan-400/50"></i>
+                                    <i class="fas fa-shopping-cart text-4xl text-cyan-400/50"></i>
                                 </div>
                                 <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-shield-alt text-4xl text-cyan-400/50"></i>
+                                    <i class="fas fa-truck text-4xl text-cyan-400/50"></i>
                                 </div>
                             </div>
                             <div class="space-y-4 pt-8">
                                 <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-lock text-4xl text-cyan-400/50"></i>
+                                    <i class="fas fa-mobile-alt text-4xl text-cyan-400/50"></i>
                                 </div>
                                 <div class="h-32 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-wifi text-4xl text-cyan-400/50"></i>
+                                    <i class="fas fa-headset text-4xl text-cyan-400/50"></i>
                                 </div>
                             </div>
                         </div>
@@ -390,28 +676,39 @@
                         <div class="w-8 h-6 rounded kenya-flag border border-white/20"></div>
                     </div>
                     <p class="text-gray-300 mb-6 text-lg leading-relaxed">
-                        GridHub Security Solutions is Nairobi's trusted partner in comprehensive security infrastructure. We specialize in providing cutting-edge surveillance technology that protects what matters most to Kenyan homes and businesses.
+                        GridHub Security Solutions is Kenya's trusted online security equipment store. We operate entirely online to bring you professional-grade security products at competitive prices, delivered directly to your location anywhere in Kenya.
                     </p>
                     <p class="text-gray-400 mb-8 leading-relaxed">
-                        Located in the heart of Nairobi, we serve clients across Kenya with professional-grade security equipment. From residential CCTV systems to commercial-grade security networks, our curated selection meets the highest standards of quality and reliability in East Africa.
+                        Since 2019, we've served thousands of customers across Nairobi and beyond with CCTV systems, dash cameras, smart sensors, and hidden cameras. Our online model allows us to keep costs low while providing fast delivery and excellent customer support via WhatsApp and phone.
                     </p>
                     
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="glass-panel p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-cyan-400">Online</div>
+                            <div class="text-sm text-gray-400">Shopping 24/7</div>
+                        </div>
+                        <div class="glass-panel p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-cyan-400">Kenya</div>
+                            <div class="text-sm text-gray-400">Nationwide Delivery</div>
+                        </div>
+                    </div>
+
                     <div class="space-y-4">
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-check-circle text-cyan-400"></i>
-                            <span class="text-gray-300">Certified security equipment with local warranty</span>
+                            <span class="text-gray-300">Shop online from anywhere in Kenya</span>
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-check-circle text-cyan-400"></i>
-                            <span class="text-gray-300">Professional installation services in Nairobi</span>
+                            <span class="text-gray-300">Fast delivery to your door</span>
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-check-circle text-cyan-400"></i>
-                            <span class="text-gray-300">Bulk pricing available for corporate clients</span>
+                            <span class="text-gray-300">M-Pesa & cash on delivery accepted</span>
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fas fa-check-circle text-cyan-400"></i>
-                            <span class="text-gray-300">M-Pesa and bank transfer payments accepted</span>
+                            <span class="text-gray-300">Remote installation support included</span>
                         </div>
                     </div>
                 </div>
@@ -420,70 +717,123 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" class="py-20 relative bg-gradient-to-b from-transparent to-black/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="font-orbitron text-4xl font-bold mb-4">GET IN <span class="text-cyan-400">TOUCH</span></h2>
-                <p class="text-gray-400">Request a quote or consultation for your security needs in Nairobi</p>
+                <h2 class="font-orbitron text-4xl font-bold mb-4">CONTACT <span class="text-cyan-400">US</span></h2>
+                <p class="text-gray-400">We're here to help with your security needs</p>
             </div>
 
-            <div class="glass-panel p-8 md:p-12 rounded-2xl border border-cyan-500/20">
-                <form onsubmit="handleContactSubmit(event)" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                            <input type="text" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="Your name">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass-panel p-8 rounded-2xl border border-cyan-500/20">
+                    <h3 class="font-bold text-xl mb-6 text-cyan-400">Send us a Message</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-6" id="contact-form">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Full Name *</label>
+                                <input type="text" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-2">Phone Number *</label>
+                                <input type="tel" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="0700 000 000">
+                            </div>
                         </div>
+                        
                         <div>
-                            <label class="block text-sm font-medium text-gray-400 mb-2">Phone Number</label>
-                            <input type="tel" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="e.g., 0700 000 000">
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+                            <input type="email" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="your@email.com">
                         </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                        <input type="email" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="your@email.com">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">Subject</label>
-                        <select class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors">
-                            <option>Product Inquiry</option>
-                            <option>Installation Support</option>
-                            <option>Bulk Order</option>
-                            <option>Technical Support</option>
-                            <option>Site Survey Request</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                        <textarea rows="4" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="Tell us about your security requirements..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-cyan-500/25 transition-all transform hover:scale-[1.02]">
-                        SEND MESSAGE
-                    </button>
-                </form>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">How can we help?</label>
+                            <select class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors">
+                                <option>Product Inquiry</option>
+                                <option>Place an Order</option>
+                                <option>Delivery Question</option>
+                                <option>Installation Support</option>
+                                <option>After-Sales Support</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                            <textarea rows="4" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-cyan-400 focus:outline-none transition-colors" placeholder="Tell us what you need..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold text-lg hover:shadow-lg hover:shadow-cyan-500/25 transition-all transform hover:scale-[1.02] flex items-center justify-center space-x-2">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>SEND MESSAGE</span>
+                        </button>
+                        <p class="text-xs text-gray-500 text-center">We typically respond within 2 hours during business hours</p>
+                    </form>
+                </div>
 
-                <div class="mt-8 pt-8 border-t border-gray-800 grid md:grid-cols-3 gap-6 text-center">
-                    <div class="group cursor-pointer" onclick="window.location.href='mailto:gridhub.solutions@gmail.com'">
-                        <div class="w-12 h-12 mx-auto rounded-full bg-gray-800 flex items-center justify-center mb-3 group-hover:bg-cyan-500/20 transition-colors">
-                            <i class="fas fa-envelope text-cyan-400 text-xl"></i>
+                <div class="space-y-6">
+                    <div class="glass-panel p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="font-bold text-lg mb-4 text-cyan-400">Quick Contact</h3>
+                        <div class="space-y-4">
+                            <a href="https://wa.me/254706230252" target="_blank" class="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors group p-3 rounded-lg hover:bg-white/5">
+                                <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                                    <i class="fab fa-whatsapp text-green-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-500">WhatsApp (Fastest Response)</div>
+                                    <div class="font-medium">+254 706 230 252</div>
+                                </div>
+                            </a>
+                            
+                            <a href="tel:+254706230252" class="flex items-center space-x-3 text-gray-300 hover:text-cyan-400 transition-colors group p-3 rounded-lg hover:bg-white/5">
+                                <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center">
+                                    <i class="fas fa-phone text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-500">Phone</div>
+                                    <div class="font-medium">+254 706 230 252</div>
+                                </div>
+                            </a>
+                            
+                            <a href="mailto:gridhub.solutions@gmail.com" class="flex items-center space-x-3 text-gray-300 hover:text-cyan-400 transition-colors group p-3 rounded-lg hover:bg-white/5">
+                                <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center">
+                                    <i class="fas fa-envelope text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-500">Email</div>
+                                    <div class="font-medium break-all text-sm">gridhub.solutions@gmail.com</div>
+                                </div>
+                            </a>
                         </div>
-                        <p class="text-gray-400 text-sm break-all">gridhub.solutions@gmail.com</p>
                     </div>
-                    <div class="group cursor-pointer" onclick="window.location.href='tel:+254706230252'">
-                        <div class="w-12 h-12 mx-auto rounded-full bg-gray-800 flex items-center justify-center mb-3 group-hover:bg-cyan-500/20 transition-colors">
-                            <i class="fas fa-phone text-cyan-400 text-xl"></i>
+
+                    <div class="glass-panel p-6 rounded-xl border border-cyan-500/20">
+                        <h3 class="font-bold text-lg mb-4 text-cyan-400">Business Hours</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Monday - Friday</span>
+                                <span class="text-white">8:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Saturday</span>
+                                <span class="text-white">9:00 AM - 4:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Sunday</span>
+                                <span class="text-red-400">Closed</span>
+                            </div>
+                            <div class="pt-2 mt-2 border-t border-gray-800 text-cyan-400 text-xs">
+                                <i class="fas fa-clock mr-1"></i> Online shop open 24/7 for browsing and orders
+                            </div>
                         </div>
-                        <p class="text-gray-400 text-sm">+254 706 230 252</p>
                     </div>
-                    <div>
-                        <div class="w-12 h-12 mx-auto rounded-full bg-gray-800 flex items-center justify-center mb-3">
-                            <i class="fas fa-map-marker-alt text-cyan-400 text-xl"></i>
-                        </div>
-                        <p class="text-gray-400 text-sm">Nairobi, Kenya</p>
+
+                    <div class="glass-panel p-6 rounded-xl border border-green-500/30 bg-gradient-to-br from-green-500/10 to-transparent">
+                        <h3 class="font-bold text-lg mb-2 text-white flex items-center space-x-2">
+                            <i class="fab fa-whatsapp text-green-400"></i>
+                            <span>Prefer WhatsApp?</span>
+                        </h3>
+                        <p class="text-sm text-gray-400 mb-4">Chat with us directly for instant product recommendations and ordering</p>
+                        <a href="https://wa.me/254706230252" target="_blank" class="block w-full py-3 bg-green-600 hover:bg-green-500 text-white rounded-lg text-center font-bold transition-colors">
+                            START CHAT
+                        </a>
                     </div>
                 </div>
             </div>
@@ -496,13 +846,14 @@
             <div class="grid md:grid-cols-4 gap-8 mb-12">
                 <div class="col-span-2">
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded flex items-center justify-center">
+                        <div class="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded flex items-center justify-center relative">
                             <i class="fas fa-shield-alt text-white text-sm"></i>
+                            <div class="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                         </div>
                         <span class="font-orbitron font-bold text-xl">GRIDHUB</span>
                         <div class="w-6 h-4 rounded kenya-flag border border-white/20 ml-2"></div>
                     </div>
-                    <p class="text-gray-500 mb-4 max-w-sm">Professional security solutions for homes and businesses across Kenya. Protecting what matters with cutting-edge technology.</p>
+                    <p class="text-gray-500 mb-4 max-w-sm">Kenya's trusted online security shop. Professional CCTV, dash cams, and smart sensors delivered nationwide with installation support.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-cyan-500 hover:text-white transition-all">
                             <i class="fab fa-facebook-f"></i>
@@ -513,29 +864,25 @@
                         <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-cyan-500 hover:text-white transition-all">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-cyan-500 hover:text-white transition-all">
+                        <a href="https://wa.me/254706230252" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-green-500 hover:text-white transition-all">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4 text-white">Quick Links</h4>
-                    <ul class="space-y-2 text-gray-500">
-                        <li><a href="#products" class="hover:text-cyan-400 transition-colors">Products</a></li>
-                        <li><a href="#features" class="hover:text-cyan-400 transition-colors">Features</a></li>
-                        <li><a href="#about" class="hover:text-cyan-400 transition-colors">About Us</a></li>
-                        <li><a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a></li>
+                    <h4 class="font-bold mb-4 text-white">Shop</h4>
+                    <ul class="space-y-2 text-gray-500 text-sm">
+                        <li><a href="#products" onclick="filterCategory('cctv')" class="hover:text-cyan-400 transition-colors">CCTV Cameras</a></li>
+                        <li><a href="#products" onclick="filterCategory('dashcam')" class="hover:text-cyan-400 transition-colors">Dash Cams</a></li>
+                        <li><a href="#products" onclick="filterCategory('sensor')" class="hover:text-cyan-400 transition-colors">Motion Sensors</a></li>
+                        <li><a href="#products" onclick="filterCategory('hidden')" class="hover:text-cyan-400 transition-colors">Hidden Cameras</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4 text-white">Contact Info</h4>
+                    <h4 class="font-bold mb-4 text-white">Contact</h4>
                     <ul class="space-y-3 text-gray-500 text-sm">
-                        <li class="flex items-start space-x-3">
-                            <i class="fas fa-map-marker-alt text-cyan-400 mt-1"></i>
-                            <span>Nairobi, Kenya</span>
-                        </li>
                         <li class="flex items-center space-x-3">
                             <i class="fas fa-phone text-cyan-400"></i>
                             <span>+254 706 230 252</span>
@@ -545,8 +892,12 @@
                             <span class="break-all">gridhub.solutions@gmail.com</span>
                         </li>
                         <li class="flex items-center space-x-3">
-                            <i class="fas fa-clock text-cyan-400"></i>
-                            <span>Mon - Sat: 8AM - 6PM</span>
+                            <i class="fas fa-map-marker-alt text-cyan-400"></i>
+                            <span>Nairobi, Kenya</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-green-400">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp Available</span>
                         </li>
                     </ul>
                 </div>
@@ -556,12 +907,10 @@
                 <p class="text-gray-600 text-sm">&copy; 2024 GridHub Security Solutions. All rights reserved.</p>
                 <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm text-gray-600">
                     <span class="flex items-center space-x-2">
-                        <span>Made in</span>
-                        <div class="w-6 h-4 rounded kenya-flag border border-white/20"></div>
-                        <span>Kenya</span>
+                        <span>Online Shop</span>
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span>Open 24/7</span>
                     </span>
-                    <span>|</span>
-                    <a href="#" class="hover:text-gray-400">Privacy Policy</a>
                 </div>
             </div>
         </div>
@@ -581,7 +930,6 @@
         </div>
         
         <div id="cart-items" class="p-6 space-y-4 min-h-[300px]">
-            <!-- Cart items injected here -->
             <div class="text-center text-gray-500 mt-20">
                 <i class="fas fa-shopping-basket text-6xl mb-4 opacity-30"></i>
                 <p>Your cart is empty</p>
@@ -591,26 +939,31 @@
         
         <div id="cart-footer" class="hidden border-t border-gray-800 p-6 sticky bottom-0 bg-grid-gray">
             <div class="space-y-2 mb-4">
-                <div class="flex justify-between text-gray-400">
+                <div class="flex justify-between text-gray-400 text-sm">
                     <span>Subtotal</span>
-                    <span id="cart-subtotal">KSh 0.00</span>
+                    <span id="cart-subtotal">KSh 0</span>
                 </div>
-                <div class="flex justify-between text-gray-400">
-                    <span>Shipping</span>
-                    <span>Calculated at checkout</span>
+                <div class="flex justify-between text-gray-400 text-sm">
+                    <span>Delivery (Nairobi)</span>
+                    <span class="text-green-400">Free</span>
                 </div>
                 <div class="flex justify-between text-xl font-bold text-white pt-2 border-t border-gray-800">
                     <span>Total</span>
-                    <span id="cart-total" class="text-cyan-400">KSh 0.00</span>
+                    <span id="cart-total" class="text-cyan-400">KSh 0</span>
                 </div>
             </div>
-            <button onclick="checkout()" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold hover:shadow-lg hover:shadow-cyan-500/25 transition-all">
-                PROCEED TO CHECKOUT
+            <button onclick="checkout()" class="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-bold hover:shadow-lg hover:shadow-cyan-500/25 transition-all mb-2">
+                CHECKOUT
             </button>
-            <p class="text-center text-xs text-gray-500 mt-2">Cash on delivery available in Nairobi</p>
-            <button onclick="toggleCart(); document.getElementById('products').scrollIntoView({behavior: 'smooth'})" class="w-full py-3 mt-2 border border-gray-700 rounded-lg text-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition-all">
-                CONTINUE SHOPPING
-            </button>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="shareCart()" class="py-2 border border-gray-700 rounded-lg text-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition-all text-sm">
+                    <i class="fas fa-share-alt mr-1"></i>Share
+                </button>
+                <button onclick="saveQuote()" class="py-2 border border-gray-700 rounded-lg text-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition-all text-sm">
+                    <i class="fas fa-save mr-1"></i>Save Quote
+                </button>
+            </div>
+            <p class="text-center text-xs text-gray-500 mt-2">M-Pesa, Bank Transfer & Cash on Delivery accepted</p>
         </div>
     </div>
 
@@ -629,7 +982,7 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-8 right-8 bg-cyan-500 text-white px-6 py-4 rounded-lg shadow-2xl transform translate-y-20 opacity-0 transition-all z-50 flex items-center space-x-3">
+    <div id="toast" class="fixed bottom-8 right-8 bg-cyan-500 text-white px-6 py-4 rounded-lg shadow-2xl transform translate-y-20 opacity-0 transition-all z-50 flex items-center space-x-3 max-w-sm">
         <i class="fas fa-check-circle text-xl"></i>
         <div>
             <h4 class="font-bold">Success</h4>
@@ -637,8 +990,13 @@
         </div>
     </div>
 
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" id="back-to-top" class="fixed bottom-8 left-8 w-12 h-12 bg-cyan-500 text-black rounded-full flex items-center justify-center shadow-lg transform translate-y-20 opacity-0 transition-all z-40 hover:bg-cyan-400 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-        // Product Data with KES prices
+        // Product Data
         const products = [
             {
                 id: 1,
@@ -649,8 +1007,9 @@
                 badge: "Best Seller",
                 rating: 4.9,
                 reviews: 128,
-                description: "Professional-grade 4K resolution dome camera with 360° coverage, night vision up to 30m, and AI-powered motion detection. Perfect for Nairobi homes and businesses.",
-                specs: ["4K Ultra HD", "30m Night Vision", "IP67 Weatherproof", "AI Motion Detection", "PoE Support"]
+                description: "Professional-grade 4K resolution dome camera with 360° coverage, night vision up to 30m, and AI-powered motion detection. Perfect for home and business security.",
+                specs: ["4K Ultra HD", "30m Night Vision", "IP67 Weatherproof", "AI Motion Detection", "PoE Support"],
+                features: ["Mobile App", "Cloud Storage", "Two-way Audio"]
             },
             {
                 id: 2,
@@ -661,8 +1020,9 @@
                 badge: "New",
                 rating: 4.8,
                 reviews: 89,
-                description: "Front and rear recording with GPS tracking, G-sensor emergency lock, and super capacitor for Kenya's extreme temperatures.",
-                specs: ["1080p Front & Rear", "GPS Tracking", "G-Sensor", "170° Wide Angle", "Parking Mode"]
+                description: "Front and rear recording with GPS tracking, G-sensor emergency lock, and super capacitor for extreme temperatures. Ideal for Uber, Bolt, and private vehicles.",
+                specs: ["1080p Front & Rear", "GPS Tracking", "G-Sensor", "170° Wide Angle", "Parking Mode"],
+                features: ["Loop Recording", "Night Vision", "WiFi"]
             },
             {
                 id: 3,
@@ -673,8 +1033,9 @@
                 badge: "Sale",
                 rating: 4.7,
                 reviews: 245,
-                description: "3000-lumen LED floodlight with adjustable motion sensitivity, perfect for compound security in Kenyan homes.",
-                specs: ["3000 Lumens", "40ft Detection", "Adjustable Sensitivity", "App Control", "Weather Resistant"]
+                description: "3000-lumen LED floodlight with adjustable motion sensitivity. Perfect for compound security and outdoor lighting automation.",
+                specs: ["3000 Lumens", "40ft Detection", "Adjustable Sensitivity", "App Control", "Weather Resistant"],
+                features: ["Solar Option", "Dusk to Dawn", "Alarm"]
             },
             {
                 id: 4,
@@ -685,8 +1046,9 @@
                 badge: "Hot",
                 rating: 4.6,
                 reviews: 312,
-                description: "Ultra-compact hidden camera with live streaming, motion alerts, and magnetic mount for versatile indoor security.",
-                specs: ["1080p HD", "WiFi Connected", "Motion Alerts", "Magnetic Mount", "6hr Battery"]
+                description: "Ultra-compact hidden camera with live streaming, motion alerts, and magnetic mount for versatile indoor security monitoring.",
+                specs: ["1080p HD", "WiFi Connected", "Motion Alerts", "Magnetic Mount", "6hr Battery"],
+                features: ["Night Vision", "App Control", "Cloud"]
             },
             {
                 id: 5,
@@ -697,8 +1059,9 @@
                 badge: "Premium",
                 rating: 4.9,
                 reviews: 67,
-                description: "Pan-Tilt-Zoom camera with 20x optical zoom, auto-tracking, and 500ft night vision for large compound coverage.",
-                specs: ["20x Optical Zoom", "Auto Tracking", "500ft IR Range", "IP66 Rated", "Two-way Audio"]
+                description: "Pan-Tilt-Zoom camera with 20x optical zoom, auto-tracking, and 500ft night vision for large compound and farm coverage.",
+                specs: ["20x Optical Zoom", "Auto Tracking", "500ft IR Range", "IP66 Rated", "Two-way Audio"],
+                features: ["360° View", "Preset Patrol", "AI Tracking"]
             },
             {
                 id: 6,
@@ -708,8 +1071,9 @@
                 image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=500&q=80",
                 rating: 4.7,
                 reviews: 156,
-                description: "Rearview mirror replacement with 12\" touchscreen, dual 4K cameras, and backup camera assistance for matatus and private cars.",
-                specs: ["12\" Touchscreen", "Dual 4K", "Backup Assist", "Loop Recording", "Touch Controls"]
+                description: "Rearview mirror replacement with 12\" touchscreen, dual 4K cameras, and backup camera assistance. Perfect for personal and commercial vehicles.",
+                specs: ["12\" Touchscreen", "Dual 4K", "Backup Assist", "Loop Recording", "Touch Controls"],
+                features: ["GPS", "G-Sensor", "Night Vision"]
             },
             {
                 id: 7,
@@ -719,8 +1083,9 @@
                 image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&q=80",
                 rating: 4.5,
                 reviews: 423,
-                description: "Easy-install magnetic sensor with instant phone alerts, 2-year battery life, and hub connectivity for home security.",
-                specs: ["Instant Alerts", "2yr Battery", "Easy Install", "Hub Compatible", "Tamper Alert"]
+                description: "Easy-install magnetic sensor with instant phone alerts, 2-year battery life. Essential for home security systems.",
+                specs: ["Instant Alerts", "2yr Battery", "Easy Install", "Hub Compatible", "Tamper Alert"],
+                features: ["App Notifications", "Automation", "Expandable"]
             },
             {
                 id: 8,
@@ -730,8 +1095,9 @@
                 image: "https://images.unsplash.com/photo-1558618047-f4b511d0e435?w=500&q=80",
                 rating: 4.8,
                 reviews: 98,
-                description: "Fully functional smoke detector with integrated 4K camera, 180-day standby, and remote viewing for discrete monitoring.",
-                specs: ["4K Hidden Cam", "Functional Smoke", "180-day Standby", "Wide Angle", "Cloud Storage"]
+                description: "Fully functional smoke detector with integrated 4K camera, 180-day standby. Discrete monitoring for homes and offices.",
+                specs: ["4K Hidden Cam", "Functional Smoke", "180-day Standby", "Wide Angle", "Cloud Storage"],
+                features: ["Invisible", "Long Battery", "Real Detector"]
             },
             {
                 id: 9,
@@ -742,8 +1108,9 @@
                 badge: "Complete Kit",
                 rating: 4.8,
                 reviews: 45,
-                description: "8-channel network video recorder with 4TB storage, 4 included cameras, and AI person/vehicle detection for complete home security.",
-                specs: ["8 Channels", "4TB HDD", "4 Cameras Inc", "AI Detection", "Remote Access"]
+                description: "8-channel network video recorder with 4TB storage, 4 included cameras. Complete home security solution with AI detection.",
+                specs: ["8 Channels", "4TB HDD", "4 Cameras Inc", "AI Detection", "Remote Access"],
+                features: ["Full Kit", "Plug & Play", "4K Ready"]
             },
             {
                 id: 10,
@@ -753,8 +1120,9 @@
                 image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=500&q=80",
                 rating: 4.6,
                 reviews: 78,
-                description: "Waterproof dual camera system for motorcycles with vibration alerts, GPS, and loop recording for boda boda security.",
-                specs: ["Waterproof IP67", "Dual Cam", "Vibration Alert", "GPS Logger", "Helmet Audio"]
+                description: "Waterproof dual camera system for motorcycles with vibration alerts and GPS. Perfect for boda boda security.",
+                specs: ["Waterproof IP67", "Dual Cam", "Vibration Alert", "GPS Logger", "Helmet Audio"],
+                features: ["Weatherproof", "Theft Alert", "Wide Angle"]
             },
             {
                 id: 11,
@@ -764,8 +1132,9 @@
                 image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=500&q=80",
                 rating: 4.4,
                 reviews: 134,
-                description: "Advanced acoustic sensor detects glass breaking patterns with 25ft range and smartphone notifications for shop security.",
-                specs: ["25ft Range", "Pattern Recognition", "App Alerts", "Battery Powered", "Easy Mount"]
+                description: "Advanced acoustic sensor detects glass breaking patterns with 25ft range. Ideal for shop and home window security.",
+                specs: ["25ft Range", "Pattern Recognition", "App Alerts", "Battery Powered", "Easy Mount"],
+                features: ["Smart Detection", "Low False Alarm", "Wireless"]
             },
             {
                 id: 12,
@@ -775,8 +1144,9 @@
                 image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500&q=80",
                 rating: 4.7,
                 reviews: 267,
-                description: "Functional USB charger with built-in 1080p camera, motion detection, and supports device charging for offices.",
-                specs: ["Functional USB", "1080p Cam", "Motion Detect", "Loop Recording", "No Battery Needed"]
+                description: "Functional USB charger with built-in 1080p camera. Discreet office and home monitoring solution.",
+                specs: ["Functional USB", "1080p Cam", "Motion Detect", "Loop Recording", "No Battery Needed"],
+                features: ["Disguised", "Always Powered", "Office Safe"]
             }
         ];
 
@@ -788,11 +1158,69 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             updateCartUI();
+            animateStats();
+            initScrollProgress();
+            initStickyNav();
         });
 
-        // Format currency to Kenyan Shillings
+        // Format currency
         function formatCurrency(amount) {
             return 'KSh ' + amount.toLocaleString('en-KE');
+        }
+
+        // Animate stats
+        function animateStats() {
+            setTimeout(() => {
+                animateValue('stat-products', 0, 500, 2000);
+                animateValue('stat-customers', 0, 1200, 2000);
+            }, 500);
+        }
+
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start) + '+';
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Scroll Progress
+        function initScrollProgress() {
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('progress-bar').style.width = scrolled + '%';
+                
+                const backToTop = document.getElementById('back-to-top');
+                if (winScroll > 500) {
+                    backToTop.classList.remove('translate-y-20', 'opacity-0');
+                } else {
+                    backToTop.classList.add('translate-y-20', 'opacity-0');
+                }
+            });
+        }
+
+        // Sticky Nav
+        function initStickyNav() {
+            const nav = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Render Products
@@ -822,9 +1250,9 @@
             noResults.classList.add('hidden');
             
             grid.innerHTML = filtered.map(product => `
-                <div class="product-card glass-panel rounded-xl overflow-hidden border border-gray-800 hover:border-cyan-500/50 group cursor-pointer" onclick="openProductModal(${product.id})">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <div class="product-card glass-panel rounded-xl overflow-hidden border border-gray-800 hover:border-cyan-500/50 group relative" data-product-id="${product.id}">
+                    <div class="relative h-48 overflow-hidden cursor-pointer" onclick="openProductModal(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
                         ${product.badge ? `<span class="absolute top-3 left-3 price-tag px-4 py-1 text-xs font-bold text-white">${product.badge}</span>` : ''}
                         <div class="absolute inset-0 bg-gradient-to-t from-grid-gray to-transparent opacity-60"></div>
                         <button onclick="event.stopPropagation(); addToCart(${product.id})" class="absolute bottom-3 right-3 w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all hover:bg-cyan-400 hover:scale-110 shadow-lg">
@@ -844,7 +1272,7 @@
                         <div class="flex justify-between items-center">
                             <span class="text-2xl font-orbitron font-bold text-white">${formatCurrency(product.price)}</span>
                             <button onclick="event.stopPropagation(); addToCart(${product.id})" class="text-sm text-cyan-400 hover:text-cyan-300 font-medium flex items-center space-x-1">
-                                <span>Add to Cart</span>
+                                <span>Add</span>
                                 <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
@@ -857,7 +1285,6 @@
         function filterCategory(category) {
             currentCategory = category;
             
-            // Update buttons
             document.querySelectorAll('.category-btn').forEach(btn => {
                 if (btn.dataset.category === category) {
                     btn.classList.add('category-active');
@@ -872,6 +1299,12 @@
             renderProducts(searchVal);
         }
 
+        function resetFilters() {
+            currentCategory = 'all';
+            document.getElementById('search-input').value = '';
+            filterCategory('all');
+        }
+
         // Search
         function toggleSearch() {
             const bar = document.getElementById('search-bar');
@@ -879,6 +1312,12 @@
             if (!bar.classList.contains('hidden')) {
                 document.getElementById('search-input').focus();
             }
+        }
+
+        function quickSearch(term) {
+            document.getElementById('search-input').value = term;
+            filterProducts(term);
+            document.getElementById('products').scrollIntoView({behavior: 'smooth'});
         }
 
         function filterProducts(query) {
@@ -912,6 +1351,12 @@
             }
             
             updateCartUI();
+            
+            // Ping animation
+            const ping = document.getElementById('cart-ping');
+            ping.classList.add('notification-badge');
+            setTimeout(() => ping.classList.remove('notification-badge'), 1000);
+            
             showToast(`${product.name} added to cart`);
         }
 
@@ -956,7 +1401,7 @@
                 footer.classList.add('hidden');
             } else {
                 itemsContainer.innerHTML = cart.map(item => `
-                    <div class="flex space-x-4 bg-black/30 p-4 rounded-lg border border-gray-800">
+                    <div class="flex space-x-4 bg-black/30 p-4 rounded-lg border border-gray-800 animate-slide-up">
                         <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg">
                         <div class="flex-1">
                             <h4 class="font-bold text-sm mb-1 line-clamp-2">${item.name}</h4>
@@ -983,7 +1428,39 @@
             if (cart.length === 0) return;
             
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            alert(`Thank you for your order!\n\nTotal: ${formatCurrency(total)}\n\nWe will contact you at +254706230252 to confirm delivery details within Nairobi.\n\nPayment options:\n- M-Pesa\n- Bank Transfer\n- Cash on Delivery`);
+            const message = `Hello GridHub Security,\n\nI would like to order:\n${cart.map(item => `- ${item.name} x${item.quantity} (${formatCurrency(item.price * item.quantity)})`).join('\n')}\n\nTotal: ${formatCurrency(total)}\n\nPlease confirm availability and delivery details.\n\nThank you!`;
+            
+            const whatsappUrl = `https://wa.me/254706230252?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function shareCart() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const text = `Check out my GridHub Security cart: ${cart.length} items - ${formatCurrency(total)}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My GridHub Cart',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(text);
+                showToast('Cart details copied to clipboard');
+            }
+        }
+
+        function saveQuote() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const quote = {
+                date: new Date().toLocaleDateString(),
+                items: cart,
+                total: total,
+                id: 'QT-' + Math.random().toString(36).substr(2, 9).toUpperCase()
+            };
+            
+            localStorage.setItem('gridhub_quote', JSON.stringify(quote));
+            showToast('Quote saved! Reference: ' + quote.id);
         }
 
         // Product Modal
@@ -994,36 +1471,50 @@
             const body = document.getElementById('modal-body');
             
             body.innerHTML = `
-                <div class="relative h-64 md:h-auto rounded-xl overflow-hidden">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                <div class="relative h-64 md:h-auto rounded-xl overflow-hidden image-zoom">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover cursor-zoom-in" onclick="openLightbox(this)">
                     ${product.badge ? `<span class="absolute top-4 left-4 price-tag px-4 py-1 text-xs font-bold text-white">${product.badge}</span>` : ''}
                 </div>
                 <div class="space-y-6">
                     <div>
-                        <span class="text-cyan-400 text-sm font-medium uppercase tracking-wider">${product.category}</span>
-                        <h2 class="font-orbitron text-3xl font-bold mt-2 mb-4">${product.name}</h2>
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="flex items-center space-x-1 text-yellow-400">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <span class="text-cyan-400 text-sm font-medium uppercase tracking-wider">${product.category}</span>
+                            <span class="text-gray-600">|</span>
+                            <div class="flex items-center space-x-1 text-yellow-400 text-sm">
                                 <i class="fas fa-star"></i>
                                 <span class="text-white font-bold">${product.rating}</span>
+                                <span class="text-gray-500">(${product.reviews} reviews)</span>
                             </div>
-                            <span class="text-gray-500">(${product.reviews} reviews)</span>
                         </div>
+                        <h2 class="font-orbitron text-3xl font-bold mb-2">${product.name}</h2>
                         <p class="text-3xl font-orbitron font-bold text-cyan-400">${formatCurrency(product.price)}</p>
                     </div>
                     
                     <p class="text-gray-300 leading-relaxed">${product.description}</p>
                     
-                    <div>
-                        <h4 class="font-bold mb-3 text-white">Key Features:</h4>
-                        <ul class="space-y-2">
-                            ${product.specs.map(spec => `
-                                <li class="flex items-center space-x-3 text-gray-400">
-                                    <i class="fas fa-check text-cyan-400 text-sm"></i>
-                                    <span>${spec}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-bold mb-3 text-white text-sm uppercase tracking-wider">Specifications</h4>
+                            <ul class="space-y-2">
+                                ${product.specs.map(spec => `
+                                    <li class="flex items-center space-x-3 text-gray-400 text-sm">
+                                        <i class="fas fa-check text-cyan-400 text-xs"></i>
+                                        <span>${spec}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-3 text-white text-sm uppercase tracking-wider">Key Features</h4>
+                            <ul class="space-y-2">
+                                ${(product.features || []).map(f => `
+                                    <li class="flex items-center space-x-3 text-gray-400 text-sm">
+                                        <i class="fas fa-star text-cyan-400 text-xs"></i>
+                                        <span>${f}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
                     </div>
                     
                     <div class="pt-4 space-y-3">
@@ -1031,9 +1522,21 @@
                             <i class="fas fa-shopping-cart"></i>
                             <span>ADD TO CART</span>
                         </button>
-                        <button onclick="closeProductModal()" class="w-full py-3 border border-gray-700 rounded-lg text-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition-all">
-                            CLOSE
-                        </button>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="window.open('https://wa.me/254706230252?text=Hi, I am interested in ${encodeURIComponent(product.name)}', '_blank')" class="py-3 border border-green-600 text-green-400 rounded-lg font-medium hover:bg-green-600/10 transition-all flex items-center justify-center space-x-2">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>Enquire</span>
+                            </button>
+                            <button onclick="closeProductModal()" class="py-3 border border-gray-700 rounded-lg text-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition-all">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-center space-x-6 text-sm text-gray-500 pt-4 border-t border-gray-800">
+                        <span class="flex items-center space-x-1"><i class="fas fa-truck text-cyan-400"></i><span>Free Delivery</span></span>
+                        <span class="flex items-center space-x-1"><i class="fas fa-shield-alt text-cyan-400"></i><span>1 Year Warranty</span></span>
+                        <span class="flex items-center space-x-1"><i class="fas fa-undo text-cyan-400"></i><span>7-Day Returns</span></span>
                     </div>
                 </div>
             `;
@@ -1061,6 +1564,28 @@
             }, 300);
         }
 
+        // Lightbox
+        function openLightbox(img) {
+            // Simple implementation - in production would use proper lightbox
+            window.open(img.src, '_blank');
+        }
+
+        // FAQ Toggle
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                btn.classList.add('bg-white/5');
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                btn.classList.remove('bg-white/5');
+            }
+        }
+
         // Mobile Menu
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
@@ -1082,11 +1607,23 @@
         // Contact Form
         function handleContactSubmit(e) {
             e.preventDefault();
-            showToast('Message sent successfully! We will contact you soon at +254706230252');
+            
+            const formData = new FormData(e.target);
+            let message = 'New inquiry from GridHub website:\n\n';
+            message += `Name: ${e.target.querySelector('input[type="text"]').value}\n`;
+            message += `Phone: ${e.target.querySelector('input[type="tel"]').value}\n`;
+            message += `Email: ${e.target.querySelector('input[type="email"]').value}\n`;
+            message += `Service: ${e.target.querySelector('select').value}\n`;
+            message += `Message: ${e.target.querySelector('textarea').value}\n`;
+            
+            const whatsappUrl = `https://wa.me/254706230252?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            showToast('Opening WhatsApp to send your message...');
             e.target.reset();
         }
 
-        // Close modal on escape
+        // Close modals on escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeProductModal();
@@ -1095,14 +1632,13 @@
             }
         });
 
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Close mobile menu if open
                     document.getElementById('mobile-menu').classList.add('hidden');
                 }
             });
